@@ -1,0 +1,27 @@
+FROM python:3.9
+
+RUN apt-get update && apt-get install -y \
+	dos2unix \
+	&& rm -rf /var/lib/apt/lists/*
+
+ENV PATH="/yagna:${PATH}"
+
+WORKDIR /yagna
+
+ADD https://github.com/golemfactory/yagna/releases/download/v0.14.0/golem-requestor-linux-v0.14.0.tar.gz .
+RUN tar -xvf golem-requestor-linux-v0.14.0.tar.gz
+RUN mv golem-requestor-linux-v0.14.0/gftp .
+RUN mv golem-requestor-linux-v0.14.0/yagna .
+RUN rm -fr golem-requestor-linux-v0.14.0
+RUN rm golem-requestor-linux-v0.14.0.tar.gz
+RUN chmod +x gftp
+RUN chmod +x yagna
+
+COPY run.sh .
+RUN chmod +x run.sh
+RUN dos2unix run.sh
+
+EXPOSE 7464
+EXPOSE 7465
+
+CMD ["/yagna/run.sh"]

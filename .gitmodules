@@ -1,0 +1,6 @@
+[submodule "backend_web-gpu-rendering"]
+	path = backend_web-gpu-rendering
+	url = https://github.com/norbibi/backend_web-gpu-rendering.git
+[submodule "frontend_web-gpu-rendering"]
+	path = frontend_web-gpu-rendering
+	url = https://github.com/norbibi/frontend_web-gpu-rendering.git
